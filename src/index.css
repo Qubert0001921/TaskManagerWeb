@@ -5,9 +5,180 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: lightgray;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+div.Desc {
+  margin-right: 20px;
+  margin-left: 20px;
+}
+
+label.desc {
+  font-size: 20px;
+}
+
+label.Validation {
+  color: red;
+}
+
+input[type=text].title {
+  font-size: 20px;
+  width: 490px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+div.formMenuButtons {
+  margin: 10px;
+  float: right;
+}
+
+button.cancel {
+  background-color: rgb(139, 139, 139);
+  color: white;
+  border-color: rgb(139, 139, 139);
+  border-radius: 5px;
+  padding: 5px;
+}
+
+button.save {
+  background-color: rgb(44, 184, 2);
+  color: white;
+  border-color: rgb(44, 184, 2);
+  border-radius: 5px;
+  padding: 5px;
+}
+
+button.save:hover {
+  background-color: rgb(78, 196, 43);
+  border-color:rgb(78, 196, 43);
+}
+
+button.cancel:hover {
+  background-color: rgb(151, 150, 150);
+  border-color:rgb(151, 150, 150);
+}
+
+textarea.description {
+  width: 490px;
+  resize: none;
+  height: 250px;
+  font-size: 20px;
+}
+
+h1.taskTitle {
+  font-size: 30px;
+  font-weight:600;
+  word-wrap: break-word;
+  margin-top: 19px;
+}
+
+div.taskTitle {
+  word-wrap: break-word;
+
+}
+
+div.taskleftElement {
+  display: block;
+  float: left;
+}
+
+div.taskrightElement {
+  margin-top: 24px;
+  display: block;
+  float: right;
+  cursor: pointer;
+  width:32px;
+  height: 32px;
+  margin-right: 10px;
+  word-wrap: break-word;
+}
+
+input[type=checkbox].task {
+  margin-left: 20px;
+  float: left;
+  text-align: center;
+  margin-top: 34px;
+  margin-right: 15px;
+  transform: scale(1.5);
+  border: 1px solid black;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+}
+ 
+button.NewTask {
+  padding: 5px;
+  width: auto;
+  height: auto;
+  display: block;
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+div.EditDeleteTask {
+  float: right;
+  margin-top: 10px;
+  margin-right: 10px;
+}
+
+button.DoneTask:hover {
+  background-color: aliceblue;
+}
+
+div.clear {
+  clear: both;
+}
+
+div.task {
+  border-radius:20px;
+  margin-bottom: 1em;
+  margin-left: auto;
+  margin-right: auto;
+  width: 1000px;
+  height: auto;
+  border: 1px solid rgb(173, 173, 173);
+  word-wrap: break-word;
+  background-color: white ;
+  padding: 20px;
+  transition-duration: 1s;
+}
+
+div#home {
+  width: 1000px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+button {
+  border: 1px solid rgb(0, 0, 0);
+  color: white;
+  border-radius: 5px;
+  background-color: rgb(0, 162, 255);
+  font-size: 16px;
+  margin-right: 5px;
+  padding: 5px;
+  cursor: pointer;
+  width: 80px;
+}
+
+button.EditTask {
+  background-color: rgb(252, 184, 57);
+  color: white;
+  border-color: rgb(248, 203, 119);
+  border-radius: 5px;
+  padding: 5px;
+}
+
+button.DeleteTask {
+  background-color: rgb(248, 82, 82);
+  color: white;
+  border-color: rgb(243, 140, 140);
+  border-radius: 5px;
+  padding: 5px;
 }

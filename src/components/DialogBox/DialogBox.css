@@ -1,0 +1,30 @@
+div.DialogBox {
+    background-color: white;
+    border: 1px solid black;
+    z-index:1;
+    position: fixed; 
+    left: 0; 
+    right: 0; 
+    bottom: 0;
+    top: 0;
+    margin: auto;
+    width: 500px;
+    height: 600px;
+    padding: 10px;
+}
+
+button.DialogButton {
+    background-color: gray;
+    border-radius: 30px;
+    width: 30px;
+    border: none;
+    position: absolute;
+    right: 2px;
+    top: 12px;
+    right: 10px;
+    align-self: flex-end;
+}
+
+button.DialogButton:hover {
+    background-color: rgb(148, 148, 148);
+}
