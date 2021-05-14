@@ -10,7 +10,7 @@ class DialogBox extends React.Component {
 
         const dialogbox = (
             <div className="DialogBox" style={style}>
-                <button className="DialogButton" onClick={this.props.onClose}>x</button>
+                <button className="DialogButton" onClick={this.props.onClose}>✕</button>
                 {this.props.children}
             </div>
         )
