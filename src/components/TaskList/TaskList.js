@@ -2,12 +2,11 @@ import React from 'react';
 import Task from './Task';
 import DialogBox from '../DialogBox/DialogBox';
 import TaskValidator from './Validation/validator';
+import TasksClient from '../../client/tasks';
 
 class TaskList extends React.Component {
     state = {
-        tasks: [
-            { id: "32tr23g23g", title: "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW", desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum." },  
-        ],
+        tasks: [],
         addTask: false,
         TaskTitle: "",
         TaskDesc: "",
@@ -15,6 +14,11 @@ class TaskList extends React.Component {
         TaskDescValidation: null,
         editTask: false,
         editTaskElement: null
+    }
+
+    async componentDidMount() {
+        const tasks = await TasksClient.getTasks();
+        this.setState({tasks: tasks});
     }
 
     render() {
@@ -26,13 +30,13 @@ class TaskList extends React.Component {
             if(this.state.addTask) this.setState({ addTask: false, editTask: true});
             else this.setState({ editTask: true, editTaskElement: task, TaskTitle: task.title, TaskDesc: task.desc});
         }
-        const tasks = this.state.tasks.map(task => <Task element={task} onEdit={() => showEditTaskForm(task)} onDelete={() => deleteTask(task.id)}/>);
+        const tasks = this.state.tasks.map(task => <Task element={task} onEdit={() => showEditTaskForm(task)} onDelete={() => deleteTask(task._id)}/>);
         const onTitleChange = event => this.setState({ TaskTitle: event.target.value });
         const onDescChange = event => this.setState({ TaskDesc: event.target.value });
-        const exitAddTaskForm = () => this.setState({addTask: false, TaskTitleValidation: null, TaskDescValidation: null});
-        const exiteditTaskForm = () => this.setState({editTask: false});
+        const exitAddTaskForm = () => this.setState({addTask: false, TaskTitleValidation: null, TaskDescValidation: null, TaskTitle: "", TaskDesc: ""});
+        const exiteditTaskForm = () => this.setState({editTask: false, TaskTitleValidation: null, TaskDescValidation: null, TaskTitle: "", TaskDesc: ""});
 
-        const createTask = () => {
+        const createTask = async () => {
             const title = this.state.TaskTitle;
             const desc = this.state.TaskDesc;
             const titleValidation = TaskValidator.validateTitle(title);
@@ -41,12 +45,15 @@ class TaskList extends React.Component {
             if(titleValidation || descValidation) {
                 this.setState({ TaskTitleValidation: titleValidation, TaskDescValidation: descValidation});
             } else {
-                this.state.tasks.push({ id:"dqwdq3r32FF", title: title, desc: desc });
+                const task = await TasksClient.createTask({title: title, desc: desc});
+                this.state.tasks.push(task);
                 this.setState({ 
                     TaskDescValidation: null, 
                     TaskTitleValidation: null,
                     addTask: false,
-                    tasks: this.state.tasks
+                    tasks: this.state.tasks,
+                    TaskTitle: "",
+                    TaskDesc: ""
                 });
 
             }   
@@ -55,7 +62,8 @@ class TaskList extends React.Component {
         const deleteTask = id => {
             const tasks = this.state.tasks;
             tasks.forEach(task => {
-                if(task.id === id) {
+                if(task._id === id) {
+                    TasksClient.deleteTask(id);
                     delete tasks[tasks.indexOf(task)];
                 } 
             });
@@ -72,15 +80,19 @@ class TaskList extends React.Component {
                 this.setState({ TaskTitleValidation: titleValidation, TaskDescValidation: descValidation});
             } else {
                 tasks.forEach(task => {
-                    if(task.id === this.state.editTaskElement.id) {
+                    if(task._id === this.state.editTaskElement._id) {
                         task.title = this.state.TaskTitle;
                         task.desc = this.state.TaskDesc;
+
+                        TasksClient.editTask(task._id, {title: this.state.TaskTitle, desc: this.state.TaskDesc});
                         
                         this.setState({ 
                             TaskDescValidation: null, 
                             TaskTitleValidation: null,
                             editTask: false,
-                            tasks: this.state.tasks
+                            tasks: this.state.tasks,
+                            TaskTitle: "",
+                            TaskDesc: ""
                         });
                     }
                 });
@@ -89,9 +101,17 @@ class TaskList extends React.Component {
 
         return (
         <div id="home">
-            <button onClick={showAddTaskForm}>Add Task</button>
+            <div id="options">
+                <div id="logo" style={{float: 'left'}}>
+                    <label className="title">Lista zadań</label>
+                </div>
+                <div id="TaskOptions">
+                    <button id="addTask" onClick={showAddTaskForm}>+ dodaj</button>
+                </div>
+                <div className="clear"></div>
+            </div>
             <DialogBox show={this.state.addTask} onClose={exitAddTaskForm} width="500px" height="480px">
-                <h1>Stwórz zadanie</h1>
+                <h1>Dodaj zadanie</h1>
                 <label className="formElement">Tytuł: </label>
                 <label className="Validation">{this.state.TaskTitleValidation}</label>
                     <br />

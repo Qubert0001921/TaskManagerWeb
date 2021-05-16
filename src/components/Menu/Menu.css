@@ -1,0 +1,18 @@
+div#menu {
+    width: 100%;
+    background-color: rgb(0, 162, 255);
+    height: 70px;
+    margin-bottom: 10px;
+    margin-top: 0 !important;
+}
+
+div#user-img {
+    margin-top: 8px;
+    margin-right: 20px;
+    width: 50px;
+    float: right;
+}
+
+div#user-img:hover {
+    cursor: pointer;
+}

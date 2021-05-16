@@ -12,7 +12,7 @@ class Task extends React.Component{
     render () {
         let desc = this.props.element.desc;
         const title = this.props.element.title;
-        const id = this.props.element.id;
+        const _id = this.props.element._id;
 
         const descBlock = (
         <div className="Desc" >
@@ -34,7 +34,7 @@ class Task extends React.Component{
         }
 
         return (
-            <div className="task" key={id}>
+            <div className="task" key={_id}>
                 <div className="taskleftElement">
                     <input type="checkbox" className="task" />
                 </div>

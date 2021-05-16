@@ -5,12 +5,50 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: lightgray;
+  background-color: rgb(253, 253, 253);
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+button#addTask {
+  display: block;
+  float: left;
+  bottom: 0;
+  position: absolute;
+  background-color: rgb(44, 184, 2);
+  color: white;
+  border-color: rgb(44, 184, 2);
+  border-radius: 5px;
+  padding: 5px;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+button#addTask:hover {
+  background-color: rgb(78, 196, 43);
+  border-color:rgb(78, 196, 43);
+}
+
+div#options {
+  position: relative;
+}
+
+div#TaskOptions {
+  float: left;
+  position: relative;
+  background-color: black;
+  height: 65px;
+  bottom:0;
+}
+
+div#logo {
+  position: relative;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin: 10px;
+  float: left;
 }
 
 div.Desc {
@@ -24,6 +62,19 @@ label.desc {
 
 label.Validation {
   color: red;
+}
+
+label.title {
+  font-weight: bold;
+  font-size: 40px;
+}
+
+textarea {
+  border: 1px solid rgb(173, 173, 173);
+}
+
+input[type=text] {
+  border: 1px solid rgb(173, 173, 173);
 }
 
 input[type=text].title {
@@ -153,7 +204,7 @@ div.task {
 }
 
 div#home {
-  width: 1000px;
+  width: 1041px;
   margin-right: auto;
   margin-left: auto;
 }
@@ -163,11 +214,14 @@ button {
   color: white;
   border-radius: 5px;
   background-color: rgb(0, 162, 255);
-  font-size: 16px;
+  font-size: 17px;
   margin-right: 5px;
   padding: 5px;
   cursor: pointer;
   width: 80px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
 }
 
 button.EditTask {

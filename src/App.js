@@ -1,8 +1,16 @@
 import React from 'react';
-import TaskList from './components/TaskList/TaskList';
-
+import Todo from './components/pages/Todo';
+import Login from './components/pages/Login';
+import Menu from './components/Menu/Menu';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 function App() {
-  return <TaskList />;
+      return (
+      <Router>
+        <Switch>
+          <Route path="/" exact component={Todo} />
+          <Route path="/login" component={Login} />
+        </Switch>
+      </Router>);
 }
 
 export default App;
