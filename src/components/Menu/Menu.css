@@ -13,6 +13,13 @@ div#user-img {
     float: right;
 }
 
-div#user-img:hover {
-    cursor: pointer;
+div#logout {
+    width: 50px;
+    margin-top: 35px;
+    margin-right: 10px;
+    float:right;
+}
+
+a:visited {
+    color:blue;
 }

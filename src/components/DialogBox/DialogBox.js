@@ -7,11 +7,12 @@ class DialogBox extends React.Component {
             width: this.props.width,
             height: this.props.height
         }
+        const content = this.props.children;
 
         const dialogbox = (
             <div className="DialogBox" style={style}>
                 <button className="DialogButton" onClick={this.props.onClose}>✕</button>
-                {this.props.children}
+                {content}
             </div>
         )
         return <div>{this.props.show ? dialogbox : null}</div>;

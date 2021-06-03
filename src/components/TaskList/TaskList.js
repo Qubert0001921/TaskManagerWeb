@@ -6,7 +6,7 @@ import TasksClient from '../../client/tasks';
 
 class TaskList extends React.Component {
     state = {
-        tasks: [],
+        tasks: this.props.tasks,
         addTask: false,
         TaskTitle: "",
         TaskDesc: "",
@@ -16,6 +16,7 @@ class TaskList extends React.Component {
         editTaskElement: null
     }
 
+    // set all tasks
     async componentDidMount() {
         const tasks = await TasksClient.getTasks();
         this.setState({tasks: tasks});
@@ -37,16 +38,17 @@ class TaskList extends React.Component {
         const exiteditTaskForm = () => this.setState({editTask: false, TaskTitleValidation: null, TaskDescValidation: null, TaskTitle: "", TaskDesc: ""});
 
         const createTask = async () => {
+            const tasks = this.state.tasks;
             const title = this.state.TaskTitle;
             const desc = this.state.TaskDesc;
-            const titleValidation = TaskValidator.validateTitle(title);
-            const descValidation = TaskValidator.validateDesc(desc);
+            const titleValidation = TaskValidator.validateText(title, 32, "Nieprawidłowy tytuł!");
+            const descValidation = TaskValidator.validateText(desc, 1000, "Nieprawidłowy opis!");
 
             if(titleValidation || descValidation) {
                 this.setState({ TaskTitleValidation: titleValidation, TaskDescValidation: descValidation});
             } else {
                 const task = await TasksClient.createTask({title: title, desc: desc});
-                this.state.tasks.push(task);
+                tasks.push(task);
                 this.setState({ 
                     TaskDescValidation: null, 
                     TaskTitleValidation: null,
@@ -73,19 +75,25 @@ class TaskList extends React.Component {
 
         const editTask = () => {
             const tasks = this.state.tasks;
-            const titleValidation = TaskValidator.validateTitle(this.state.TaskTitle);
-            const descValidation = TaskValidator.validateDesc(this.state.TaskDesc);
+            const title = this.state.TaskTitle;
+            const desc = this.state.TaskDesc;
+            const titleValidation = TaskValidator.validateText(title, 32, "Nieprawidłowy tytuł!");
+            const descValidation = TaskValidator.validateText(desc, 1000, "Nieprawidłowy opis!");
 
+            // check validation
             if(titleValidation || descValidation) {
                 this.setState({ TaskTitleValidation: titleValidation, TaskDescValidation: descValidation});
             } else {
                 tasks.forEach(task => {
                     if(task._id === this.state.editTaskElement._id) {
+                        // edit task in frontend
                         task.title = this.state.TaskTitle;
                         task.desc = this.state.TaskDesc;
 
+                        // edit task in backend
                         TasksClient.editTask(task._id, {title: this.state.TaskTitle, desc: this.state.TaskDesc});
                         
+                        // set state values
                         this.setState({ 
                             TaskDescValidation: null, 
                             TaskTitleValidation: null,

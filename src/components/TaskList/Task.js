@@ -26,11 +26,8 @@ class Task extends React.Component{
         
         const negateShowDesc = () => {
             this.setState({ showDesc: !this.state.showDesc });
-            if(this.state.showDescImage === arrow_left) {
-                this.setState({showDescImage: arrow_down, descBlock: descBlock});
-            } else {
-                this.setState({showDescImage: arrow_left, descBlock: ""});
-            }  
+            if(this.state.showDescImage === arrow_left) this.setState({showDescImage: arrow_down, descBlock: descBlock});
+            else this.setState({showDescImage: arrow_left, descBlock: ""});  
         }
 
         return (
